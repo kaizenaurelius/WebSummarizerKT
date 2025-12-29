@@ -23,3 +23,35 @@ def is_a_news_link(url, base_domain):
     #3 para nombres muy cortos.(noticias suelen tener nombres largos)
     if len(url) < 20:
         return False
+    
+def run_bot(main_url):
+    print(f"Bot initializing in: {main_url}")
+    
+    
+    #A. Asking for Links
+    print("Searching links...")
+    all_links = fetch_website_links(main_url)
+    
+    #B. Filtering useful links
+    
+    qualifies = [link for link in all_links if is_a_news_link(link, main_url) ]
+    
+    #C. Main Loop
+    for i, link in enumerate(qualifies[:3]): #Testing a few links
+        print(f"\n[{i+1}] Procesando: {link}")
+        
+        try:
+            #D. Summarizing
+            result = summarize(link)
+            print("---Summary---")
+            print(result)
+            print("-------------")
+            
+        except Exception as e:
+            print(f"Error: {e}")
+            
+        time.sleep(2)
+        
+if __name__ == "__main__":
+    target_url = input("Ingresa la web de noticias ")
+    run_bot(target_url)
