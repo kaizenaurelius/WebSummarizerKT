@@ -5,7 +5,7 @@ from scraper import fetch_website_links
 from summarizeWebsite import summarize
 
 def is_a_news_link(url, base_domain):
-    """ Filtrando links qu eno sean del mismo dominio """
+    """ Filtrando links que no sean del mismo dominio """
     
     
     #1 asseguramos que pertenezcan al mismo sition, ejemplo que no sea facebook.
@@ -24,6 +24,8 @@ def is_a_news_link(url, base_domain):
     if len(url) < 20:
         return False
     
+    
+    return True
 def run_bot(main_url):
     print(f"Bot initializing in: {main_url}")
     
@@ -35,6 +37,7 @@ def run_bot(main_url):
     #B. Filtering useful links
     
     qualifies = [link for link in all_links if is_a_news_link(link, main_url) ]
+    print(qualifies)
     
     #C. Main Loop
     for i, link in enumerate(qualifies[:3]): #Testing a few links
